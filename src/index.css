@@ -1,0 +1,443 @@
+:root {
+  --glados-background-color: #f47e00;
+  --glados-shadow-color: #9f5200;
+  --glados-potato-shape: polygon(0 18%, 35% 0, 65% 0, 100% 18%, 100% 50%, 90% 57%, 90% 86%, 65% 100%, 35% 100%, 10% 86%, 10% 57%, 0 50%);
+  --dark-color: #202127;
+  --lens-background-color: #ebebeb;
+  --lens-shadow-color: #9a9899;
+  --lens-size: 165px;
+}
+
+body {
+  background: #4855a0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+.glados-potato-container {
+  --width: 330px;
+  --height: 460px;
+
+  width: var(--width);
+  height: var(--height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  & .glados-potato {
+    --glados-width: 240px;
+    --glados-height: 360px;
+
+    width: var(--glados-width);
+    height: var(--glados-height);
+    clip-path: var(--glados-potato-shape);
+    background-color: var(--glados-background-color);
+    background-image:
+      linear-gradient(to right, var(--glados-background-color) 34%, transparent 34%),
+      linear-gradient(135deg, transparent 0 62%, var(--glados-shadow-color) 60%),
+      linear-gradient(to right, var(--glados-background-color) 0 63%, var(--glados-shadow-color) 40%);
+
+    & .glados-potato-head {
+      height: 57%;
+      position: relative;
+
+      & .buses {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        transform: translateY(64px);
+        z-index: 4;
+
+        & .bus {
+          --bus-color: #d1d013;
+          --bus-shadow-color: #9f9522;
+
+          width: 100%;
+          height: 10px;
+          background-image: linear-gradient(to right, var(--bus-color) 50%, var(--bus-shadow-color) 50%);
+          margin-bottom: 10px;
+        }
+      }
+
+      & .lens-shadow {
+        width: var(--lens-size);
+        height: var(--lens-size);
+        border-radius: 50%;
+        background: var(--glados-shadow-color);
+        transform: translate(22px, 55px);
+        position: absolute;
+
+        /* Apply cascade */
+        & .hooks {
+          &.top { transform: translate(-6px, -20px); }
+          &.bottom { transform: translate(-6px, 4px); }
+          & .hook { background: var(--glados-shadow-color); }
+        }
+      }
+    }
+
+    & .glados-potato-body {
+      height: 200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & .root {
+        --scale: scaleX(1);
+
+        width: 8px;
+        height: 20px;
+        background: var(--dark-color);
+        transform: translate(30px);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 35%);
+
+        &.root-1 { transform: translate(40px, -10px) var(--scale); }
+        &.root-2 { transform: translate(-55px, 10px) var(--scale); }
+
+        &.inverted {
+          --scale: scaleX(-1);
+        }
+      }
+
+      & .body-shadow {
+        & .root-3 { transform: translate(-124px, 50px) var(--scale); }
+        & .root-4 { transform: translate(-90px, 8px) var(--scale); }
+        & .root-5 { transform: translate(-50px, -20px) var(--scale); }
+      }
+    }
+  }
+
+  & .nail {
+    width: 6px;
+    height: 78px;
+    position: absolute;
+    background: var(--dark-color);
+    bottom: 0;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 8px;
+      height: 3px;
+      position: absolute;
+      bottom: 0;
+      background: var(--dark-color);
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+
+    &.right {
+      transform: translate(115px, -155px) rotate(-90deg);
+    }
+  }
+
+  & .claw {
+    width: 50px;
+    height: 8px;
+    border: 3px solid var(--dark-color);
+    position: absolute;
+
+    &.left {
+      left: 0;
+      transform: translate(20px, 115px);
+    }
+
+    &.right {
+      right: 0;
+      transform: translate(-18px, -128px);
+    }
+  }
+}
+
+.cable-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  &.top {
+    position: absolute;
+    justify-content: center;
+    align-items: flex-start;
+
+    & .cable {
+      background: var(--dark-color);
+      width: 295px;
+      height: 8px;
+      transform: translate(1px, 121px) rotate(-20deg) skew(-22deg);
+      z-index: 2;
+    }
+
+    & .filter {
+      background: var(--dark-color);
+      width: 14px;
+      height: 22px;
+      position: absolute;
+      transform: translate(72px, 88px) rotate(70deg);
+      z-index: 2;
+    }
+  }
+
+  &.left {
+    position: absolute;
+
+    & .cable {
+      background: var(--dark-color);
+      width: 8px;
+      transform: translate(26px, -21px);
+      height: 267px;
+    }
+
+    & .filter {
+      background: var(--dark-color);
+      width: 14px;
+      height: 22px;
+      transform: translate(15px, -50px);
+    }
+  }
+}
+
+.clamp-container {
+  width: 375px;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+
+  &.bottom {
+    transform: translate(50px, -15px);
+  }
+
+  &.right {
+    transform: translate(136px, -190px) rotate(90deg);
+    z-index: 2;
+
+    & .cable {
+      width: 108px;
+    }
+
+    & .protector {
+      transform: scaleY(-1);
+    }
+  }
+
+  & .cable {
+    background: var(--dark-color);
+    width: 50px;
+    height: 40%;
+  }
+
+  & .end {
+    width: 140px;
+    height: 100%;
+    display: flex;
+
+    & .filter {
+      background:
+        linear-gradient(to bottom, transparent 50%, #0006 50%),
+        linear-gradient(to right, var(--filter-color) 60%, #42413f 80%);
+      width: 30px;
+      height: 100%;
+
+      &.blue { --filter-color: #639dcf; }
+      &.black { --filter-color: #4a4645; }
+      &.yellow { --filter-color: #856502; }
+    }
+
+    & .protector {
+      background: linear-gradient(to bottom, brown 50%, #681919 50%);
+      clip-path: polygon(0 25%, 25% 0, 100% 0, 100% 100%, 25% 100%, 0 75%);
+      width: 40px;
+      height: 100%;
+    }
+
+    & .clamp {
+      width: 30px;
+      height: 100%;
+      background:
+        linear-gradient(40deg, #aaa 0 25%, transparent 0 25%),
+        linear-gradient(to bottom, #fff 50%, #aaa 50%);
+      clip-path: polygon(0 15%, 20% 25%, 100% 25%, 100% 75%, 20% 75%, 0% 85%);
+    }
+  }
+}
+
+.hooks {
+  height: 25px;
+  display: flex;
+
+  &.top,
+  &.bottom {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &.top {
+    top: 0;
+    transform: translateY(-12px);
+  }
+
+  &.bottom {
+    bottom: 0;
+    transform: translateY(12px);
+  }
+
+  & .hook {
+    width: 8px;
+    height: 100%;
+    margin: 0 4px;
+    background: var(--dark-color);
+  }
+}
+
+.lens {
+  width: var(--lens-size);
+  height: var(--lens-size);
+  background-image: linear-gradient(to right, var(--lens-background-color) 50%, var(--lens-shadow-color) 50%);
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-25px, -55px);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 45px;
+    height: 5px;
+    background: var(--dark-color);
+    position: absolute;
+  }
+
+  &::before { left: 0; }
+  &::after { right: 0; }
+
+  & .circle {
+    width: 45%;
+    height: 45%;
+    border: 10px solid var(--dark-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .eye {
+      --eye-default-shadow: 4px 4px 4px #0004 inset;
+      --time: 0.1s;
+
+      width: 36px;
+      height: 36px;
+      background: var(--eye-background-color, var(--glados-shadow-color));
+      border-radius: 50%;
+      box-shadow: var(--eye-default-shadow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: box-shadow var(--time), background var(--time);
+      will-change: box-shadow, background;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        background: #fff;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      &::after {
+        width: 8px;
+        height: 8px;
+        transform: translate(-5px, -5px);
+      }
+    }
+  }
+
+  & .hole {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--glados-background-color);
+    border-radius: 50%;
+    left: 14px;
+    transform: translateY(15px);
+    box-shadow: 2px 2px 0 var(--glados-shadow-color) inset;
+  }
+}
+
+.cpu-container {
+  width: 75px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  transform: translate(-45px, -25px);
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+
+  & .connector {
+    width: 12px;
+    height: 6px;
+    background: #333;
+    border: 6px solid var(--dark-color);
+    border-left: 0;
+    border-right: 0;
+  }
+
+  & .cpu {
+    width: 65px;
+    height: 100%;
+    background: linear-gradient(#fff 50%, var(--lens-shadow-color) 50%);
+    display: flex;
+    justify-content: center;
+
+    & .circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 3px solid #6a5f55;
+      transform: translate(16px, 5px);
+      background: red;
+      box-shadow:
+        0 0 6px 1px darkred,
+        2px 2px 0 #0002 inset;
+    }
+
+    & .mini.hooks {
+      height: 8px;
+      position: absolute;
+      bottom: -4px;
+    }
+  }
+}
+
+.glados-potato-container.talking {
+  --eye-background-color: #fde200;
+
+  & .eye {
+    box-shadow:
+      var(--eye-default-shadow),
+      0 0 5px 4px #fde200;
+  }
+}
